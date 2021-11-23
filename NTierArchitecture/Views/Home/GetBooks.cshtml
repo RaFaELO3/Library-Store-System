@@ -1,0 +1,33 @@
+﻿@model StoreViewModel
+
+@section styles{
+    <style>
+        body {
+            background-color: #452473;
+        }
+    </style>
+}
+<div class="d-flex justify-content-center flex-row flex-wrap">
+
+    @for (int i = 0; i < Model.books.Count; i++)
+    { 
+        <div class="card d-block p-3 m-3" style="width:18rem;">
+            <img src="~/img/book.png" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@Model.books[i].BookName</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Author</b> : @Model.books[i].author.AuthorName @Model.books[i].author.AuthorSurname</li>
+                <li class="list-group-item"><b>Genre</b> : @Model.books[i].genre.GenreName</li>
+                <li class="list-group-item"><b>Price</b>: @Model.books[i].BookPrice$</li>
+                <li class="list-group-item"><b>Count</b> : @Model.books[i].BookCount</li>
+            </ul>
+
+            <div class="card-body">
+                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.books[i].BookID" class="btn btn-success d-block">More Info</a>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.books[i].BookID" class="btn btn-danger d-block">Buy</a>
+                </div>
+        </div>
+    }
+</div>
+

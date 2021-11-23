@@ -1,0 +1,42 @@
+﻿@model StoreViewModel
+
+@section styles{
+    <style>
+        body {
+            background-color: #452473;
+        }
+    </style>
+}
+<form action="/Genre/SearchByGenre" method="get">
+    <div class="input-group mb-3 w-50 mx-auto mt-5">
+        <input type="text" class="form-control" placeholder="Search by Genre" name="gName" id="searchGenre">
+        <div class="input-group-append">
+            <button class="btn btn-info" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+<div class="d-flex justify-content-center flex-row flex-wrap">
+    @foreach (var item in Model.books)
+    {
+        <div class="card d-block p-3 m-3" style="width:18rem;">
+            <img src="~/img/book.png" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@item.BookName</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Author</b> : @item.author.AuthorName @item.author.AuthorSurname</li>
+                <li class="list-group-item"><b>Genre</b> : @item.genre.GenreName</li>
+                <li class="list-group-item"><b>Price</b>: @item.BookPrice$</li>
+                <li class="list-group-item"><b>Count</b> : @item.BookCount</li>
+            </ul>
+
+            <div class="card-body">
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.BookID" class="btn btn-success d-block">More Info</a>
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.BookID" class="btn btn-danger d-block">Buy</a>
+            </div>
+        </div>
+
+    }
+
+</div>
+
